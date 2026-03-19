@@ -1,81 +1,114 @@
+"use client";
+
 import SectionTitle from "@/components/section-title";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 
 export default function GetInTouch() {
+    const formRef = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs
+            .sendForm(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+                formRef.current,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+            )
+            .then(
+                () => {
+                    alert("✅ Message sent successfully!");
+                },
+                (error) => {
+                    console.log("STATUS:", error?.status);
+                    console.log("TEXT:", error?.text);
+                    console.log("FULL:", error);
+                    alert(`Error: ${error?.text || "Unknown error"}`);
+                }
+            );
+    };
+
     return (
-        <section className="flex flex-col items-center" id="contact">
+        <section
+            id="contact"
+            className="flex flex-col items-center px-4 md:px-6 mt-16"
+        >
             <SectionTitle
                 title="Get in touch"
                 description="Reach out to us for premium painting services and expert consultation."
             />
 
-            <form
-                onSubmit={(e) => e.preventDefault()}
-                className="grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-3xl mx-auto text-slate-900 mt-16 w-full"
+            <motion.div
+                initial={{ opacity: 0, y: 80 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="w-full max-w-4xl mt-12 md:mt-16 bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl rounded-3xl p-6 md:p-10"
             >
-                {/* Name */}
-                <motion.div
-                    initial={{ y: 150, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 320, damping: 70, mass: 1 }}
+                <form
+                    ref={formRef}
+                    onSubmit={sendEmail}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
                 >
-                    <label className="font-medium text-slate-900">Your Name</label>
-                    <input
-                        name="name"
-                        type="text"
-                        placeholder="Enter your name"
-                        className="w-full mt-2 p-3 outline-none border border-slate-700 rounded-lg placeholder-black focus-within:ring-1 transition focus:ring-indigo-600"
-                    />
-                </motion.div>
+                    {/* NAME */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-slate-700">
+                            Your Name
+                        </label>
+                        <input
+                            type="text"
+                            name="user_name"
+                            required
+                            placeholder="Enter your name"
+                            className="mt-2 px-4 py-3 rounded-xl border border-slate-300 bg-white/80"
+                        />
+                    </div>
 
-                {/* Email */}
-                <motion.div
-                    initial={{ y: 150, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 280, damping: 70, mass: 1 }}
-                >
-                    <label className="font-medium text-slate-900">Email ID</label>
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="Enter your email"
-                        className="w-full mt-2 p-3 outline-none border border-slate-700 rounded-lg placeholder-black focus-within:ring-1 transition focus:ring-indigo-600"
-                    />
-                </motion.div>
+                    {/* EMAIL */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-slate-700">
+                            Email ID
+                        </label>
+                        <input
+                            type="email"
+                            name="user_email"
+                            required
+                            placeholder="Enter your email"
+                            className="mt-2 px-4 py-3 rounded-xl border border-slate-300 bg-white/80"
+                        />
+                    </div>
 
-                {/* Message */}
-                <motion.div
-                    className="sm:col-span-2"
-                    initial={{ y: 150, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 240, damping: 70, mass: 1 }}
-                >
-                    <label className="font-medium text-slate-900">Message</label>
-                    <textarea
-                        name="message"
-                        rows={8}
-                        placeholder="Enter your message"
-                        className="resize-none w-full mt-2 p-3 outline-none border border-slate-700 rounded-lg placeholder-black focus-within:ring-1 transition focus:ring-indigo-600"
-                    />
-                </motion.div>
+                    {/* MESSAGE */}
+                    <div className="md:col-span-2 flex flex-col">
+                        <label className="text-sm font-medium text-slate-700">
+                            Message
+                        </label>
+                        <textarea
+                            name="message"
+                            rows={6}
+                            required
+                            placeholder="Enter your message"
+                            className="mt-2 px-4 py-3 rounded-xl border border-slate-300 bg-white/80"
+                        />
+                    </div>
 
-                {/* Submit */}
-                <motion.button
-                    type="submit"
-                    className="w-max flex items-center gap-2 bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white px-8 py-3 rounded-full transition"
-                    initial={{ y: 150, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 280, damping: 70, mass: 1 }}
-                >
-                    Submit
-                    <ArrowUpRight className="size-4.5" />
-                </motion.button>
-            </form>
+                    {/* BUTTON */}
+                    <div className="md:col-span-2 flex justify-end mt-2">
+                        <button
+                            type="submit"
+                            className="flex items-center gap-2 px-8 py-3 rounded-xl 
+              bg-gradient-to-r from-sky-600 to-blue-700 text-white font-medium"
+                        >
+                            Submit
+                            <ArrowUpRight className="size-4" />
+                        </button>
+                    </div>
+                </form>
+            </motion.div>
         </section>
     );
 }

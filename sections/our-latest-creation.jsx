@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function OurLatestCreation() {
   const [isHovered, setIsHovered] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null); // ✅ FIXED
   const [activeIndex, setActiveIndex] = useState(0);
   const [ready, setReady] = useState(false);
 
@@ -31,6 +31,7 @@ export default function OurLatestCreation() {
     },
   ];
 
+  // 🔁 AUTO SLIDE (desktop feel)
   useEffect(() => {
     if (isHovered) return;
     const interval = setInterval(() => {
@@ -46,8 +47,9 @@ export default function OurLatestCreation() {
         description="Premium paint solutions crafted for durability, beauty, and performance."
       />
 
+      {/* ================= DESKTOP ================= */}
       <div
-        className="mt-20 w-full max-w-7xl px-6"
+        className="hidden md:block mt-20 w-full max-w-7xl px-6"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           setIsHovered(false);
@@ -74,16 +76,9 @@ export default function OurLatestCreation() {
                   damping: 60,
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
-                className={`
-                  relative overflow-hidden rounded-2xl
-                  transition-all duration-500 ease-in-out
-                  ${ready ? "cursor-pointer" : "pointer-events-none"}
-                  ${
-                    isExpanded
-                      ? "flex-[3]"
-                      : "flex-[1.2]"
-                  }
-                `}
+                className={`relative overflow-hidden rounded-2xl transition-all duration-500 ease-in-out
+                ${ready ? "cursor-pointer" : "pointer-events-none"}
+                ${isExpanded ? "flex-[3]" : "flex-[1.2]"}`}
               >
                 {/* Image */}
                 <img
@@ -92,29 +87,18 @@ export default function OurLatestCreation() {
                   className="h-full w-full object-cover"
                 />
 
-                {/* Overlay (only when expanded) */}
+                {/* Overlay */}
                 <div
-                  className={`
-                    absolute inset-0 bg-black/45 transition-opacity duration-300
-                    ${isExpanded ? "opacity-100" : "opacity-0"}
-                  `}
+                  className={`absolute inset-0 bg-black/45 transition-opacity duration-300
+                  ${isExpanded ? "opacity-100" : "opacity-0"}`}
                 />
 
-                {/* Text (ONLY when expanded) */}
+                {/* Text */}
                 <div
-                  className={`
-                    absolute inset-x-0 bottom-0 p-10 text-white
-                    transition-all duration-300
-                    ${
-                      isExpanded
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-6"
-                    }
-                  `}
+                  className={`absolute inset-x-0 bottom-0 p-10 text-white transition-all duration-300
+                  ${isExpanded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 >
-                  <h3 className="text-3xl font-semibold">
-                    {data.title}
-                  </h3>
+                  <h3 className="text-3xl font-semibold">{data.title}</h3>
                   <p className="mt-3 text-base max-w-md leading-relaxed">
                     {data.description}
                   </p>
@@ -123,6 +107,54 @@ export default function OurLatestCreation() {
             );
           })}
         </div>
+      </div>
+
+      {/* ================= MOBILE ================= */}
+      <div className="md:hidden mt-10 w-full px-4 space-y-6">
+        {sectionData.map((data, index) => {
+          const isOpen = activeIndex === index;
+
+          return (
+            <motion.div
+              key={data.title}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => setActiveIndex(index)}
+              className="relative rounded-2xl overflow-hidden cursor-pointer"
+            >
+              {/* Image */}
+              <img
+                src={data.image}
+                alt={data.title}
+                className="w-full h-[260px] object-cover"
+              />
+
+              {/* Overlay */}
+              <div
+                className={`absolute inset-0 bg-black/50 transition-all duration-300
+                ${isOpen ? "opacity-100" : "opacity-60"}`}
+              />
+
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <h3 className="text-xl font-semibold">{data.title}</h3>
+
+                <motion.p
+                  initial={false}
+                  animate={{
+                    height: isOpen ? "auto" : 0,
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                  className="overflow-hidden text-sm mt-2 leading-relaxed"
+                >
+                  {data.description}
+                </motion.p>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

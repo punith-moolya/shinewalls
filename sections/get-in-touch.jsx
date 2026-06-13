@@ -11,9 +11,7 @@ export default function GetInTouch() {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    console.log("SERVICE:", process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
-    console.log("TEMPLATE:", process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID);
-    console.log("PUBLIC:", process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+    
 
     emailjs
       .sendForm(
@@ -95,7 +93,7 @@ export default function GetInTouch() {
               rows={6}
               required
               placeholder="Enter your message"
-              className="mt-2 px-4 py-3 rounded-xl border border-slate-300 bg-white/80"
+              className="mt-2 px-4 py-3 rounded-xl border text-black border-slate-300 bg-white/80"
             />
           </div>
 

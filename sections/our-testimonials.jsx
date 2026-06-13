@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "lucide-react";
 import SectionTitle from "@/components/section-title";
 import { motion } from "framer-motion";
 
@@ -7,51 +8,39 @@ export default function OurTestimonials() {
   const testimonials = [
     {
       quote:
-        "The finish quality is outstanding. Our living room walls still look fresh and vibrant even after two years.",
-      name: "Ramesh Kumar",
+        "Used Shinewalls Platinum Emulsion for our new home. The finish came out smooth and elegant. Even after months, the walls look fresh.",
+      name: "Praveen Shetty",
       role: "Home Owner",
-      image:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
     },
     {
       quote:
-        "Shinewalls textures added a premium look to our project. Clients instantly notice the difference.",
-      name: "Anita Sharma",
-      role: "Interior Designer",
-      image:
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
-    },
-    {
-      quote:
-        "Excellent coverage and durability. The exterior paint handled monsoon and heat without any issues.",
-      name: "Vikram Rao",
+        "We regularly use Shinewalls products in our projects. Good coverage, consistent quality, and easy application for painters.",
+      name: "Raghavendra Poojary",
       role: "Building Contractor",
-      image:
-        "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&auto=format&fit=crop&q=60",
     },
     {
       quote:
-        "Smooth application and consistent color tone. One of the best paint brands we’ve worked with.",
-      name: "Sneha Iyer",
-      role: "Architect",
-      image:
-        "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&auto=format&fit=crop&q=60",
+        "The waterproofing products performed very well during heavy monsoon. We are satisfied with the durability.",
+      name: "Mahesh Bhandary",
+      role: "Civil Engineer",
     },
     {
       quote:
-        "Great finish and easy maintenance. Perfect choice for modern homes.",
-      name: "Arjun Patel",
-      role: "Villa Owner",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&h=100&auto=format&fit=crop",
+        "Luxury Emulsion gave our interiors a premium look. The color richness and finish exceeded our expectations.",
+      name: "Keerthana Rai",
+      role: "Interior Designer",
     },
     {
       quote:
-        "Reliable quality and professional results every time. Shinewalls has become our go-to brand.",
-      name: "Meera Nair",
-      role: "Project Manager",
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/userImage/userImage1.png",
+        "Tile adhesive and grout quality are excellent. Easy to work with and provides strong bonding.",
+      name: "Dinesh Acharya",
+      role: "Tiles Contractor",
+    },
+    {
+      quote:
+        "Our customers often ask which paint we recommend. Shinewalls has become one of our trusted choices because of its reliable results.",
+      name: "Sandeep Alva",
+      role: "Paint Dealer",
     },
   ];
 
@@ -83,18 +72,16 @@ export default function OurTestimonials() {
               </p>
 
               <div className="mt-8 flex items-center gap-4">
-                <img
-                  className="h-12 w-12 rounded-full object-cover"
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                />
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#536DFF] to-[#4F39F6] text-white shadow-lg">
+                  <User size={20} />
+                </div>
+
                 <div>
                   <h3 className="font-semibold text-slate-900">
                     {testimonial.name}
                   </h3>
-                  <p className="text-sm text-sky-600">
-                    {testimonial.role}
-                  </p>
+
+                  <p className="text-sm text-sky-600">{testimonial.role}</p>
                 </div>
               </div>
             </motion.div>

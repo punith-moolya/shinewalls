@@ -59,7 +59,7 @@ export default function Navbar() {
             {/* 🔷 CTA */}
             <div className="hidden lg:block">
               <a
-                href="https://wa.me/918152088999"
+                href="https://wa.me/918867238999?text=Hello%20Shinewalls,%20I%20would%20like%20to%20know%20more%20about%20your%20products."
                 target="_blank"
                 className="rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 px-5 py-2 text-white font-medium shadow-lg hover:scale-105 hover:shadow-[0_10px_30px_rgba(14,165,233,0.3)] transition"
               >

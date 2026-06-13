@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -12,7 +12,6 @@ export default function Footer() {
       transition={{ duration: 1 }}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 py-20 text-sm text-slate-600">
-
         {/* Brand */}
         <div className="space-y-6">
           <Image
@@ -23,8 +22,8 @@ export default function Footer() {
           />
           <p className="leading-7 max-w-sm">
             We provide premium interior & exterior painting solutions with
-            flawless finishes, modern textures, and long-lasting protection
-            for homes and commercial spaces.
+            flawless finishes, modern textures, and long-lasting protection for
+            homes and commercial spaces.
           </p>
         </div>
 
@@ -43,12 +42,10 @@ export default function Footer() {
 
         {/* Contact */}
         <div className="space-y-6">
-          <h2 className="font-semibold text-slate-900 text-base">
-            Contact Us
-          </h2>
+          <h2 className="font-semibold text-slate-900 text-base">Contact Us</h2>
 
           <a
-            href="https://wa.me/91XXXXXXXXXX"
+            href="https://wa.me/918867238999?text=Hello%20Shinewalls,%20I%20would%20like%20to%20know%20more%20about%20your%20products."
             target="_blank"
             className="
               block w-full text-center
@@ -81,7 +78,18 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        © 2025 Your Painting Company. All rights reserved.
+        © 2025 Shinewalls Paints. All rights reserved.
+        <div className="mt-2">
+          Website designed & developed by{" "}
+          <a
+            href="https://punith-moolya.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-slate-700 hover:text-blue-600 transition"
+          >
+            Punith moolya
+          </a>
+        </div>
       </div>
     </motion.footer>
   );

@@ -61,7 +61,7 @@ export default function HeroSection() {
 
                     <div className="mt-10 flex flex-wrap gap-4">
                         <a
-                            href="https://wa.me/7019487628"
+                            href="https://wa.me/918867238999?text=Hello%20Shinewalls,%20I%20would%20like%20to%20know%20more%20about%20your%20products."
                             target="_blank"
                             className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 px-8 py-3 text-white font-medium shadow-lg shadow-blue-600/40 transition hover:scale-[1.03] active:scale-95"
                         >

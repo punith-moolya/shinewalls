@@ -7,12 +7,14 @@ import OurTestimonials from "@/sections/our-testimonials";
 import TrustedCompanies from "@/sections/trusted-companies";
 import GetInTouch from "@/sections/get-in-touch";
 import SubscribeNewsletter from "@/sections/subscribe-newsletter";
+import ProductsSection from "@/sections/our-latest-products";
 
 export default function Page() {
   return (
     <main className="relative">
       <HeroSection />
       <OurLatestCreation />
+      <ProductsSection/>
       <AboutOurApps />
       <OurTestimonials />
       {/* <TrustedCompanies /> */}

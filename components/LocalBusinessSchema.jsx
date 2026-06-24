@@ -2,40 +2,42 @@ export default function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Shinewalls Paints Industries",
-    "image": "https://www.shinewalls.com/SW-Circle.png",
-    "url": "https://www.shinewalls.com",
-    "telephone": "+918867238999",
-    "email": "shinewallspaint@gmail.com",
-    "address": {
+    name: "Shinewalls Paints Industries",
+    image: "https://www.shinewalls.com/SW-Circle.png",
+    url: "https://www.shinewalls.com",
+    telephone: "+918867238999",
+    email: "shinewallspaint@gmail.com",
+    priceRange: "₹₹",
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": "Your Street Address",
-      "addressLocality": "Your City",
-      "addressRegion": "Your State",
-      "postalCode": "Your PIN",
-      "addressCountry": "IN"
+      streetAddress: "Bamboo Bazar, Bunder",
+      addressLocality: "Mangaluru",
+      addressRegion: "Karnataka",
+      postalCode: "575001",
+      addressCountry: "IN",
     },
-    "geo": {
+    geo: {
       "@type": "GeoCoordinates",
-      "latitude": "YOUR_LATITUDE",
-      "longitude": "YOUR_LONGITUDE"
+      latitude: "12.861841",
+      longitude: "74.833610",
     },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "priceRange": "₹₹",
-    "paymentAccepted": "Cash, Credit Card, Debit Card, UPI",
-    "currenciesAccepted": "INR"
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
+    paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Bank Transfer",
+    currenciesAccepted: "INR",
   };
 
   return (

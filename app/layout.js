@@ -13,14 +13,16 @@ const poppins = Poppins({
 
 export const metadata = {
   metadataBase: new URL("https://www.shinewalls.com"),
-  
+
   title: {
-    default: "Shinewalls Paints Industries | Premium Paints, Waterproofing & Construction Chemicals Manufacturer in India",
-    template: "%s | Shinewalls Paints Industries"
+    default:
+      "Shinewalls Paints Industries | Paints, Waterproofing & Construction Chemicals",
+    template: "%s | Shinewalls Paints Industries",
   },
-  
-  description: "Shinewalls Paints Industries manufactures premium interior & exterior paints, wall putty, waterproofing solutions, primers, construction chemicals, tile adhesives, wood coatings, industrial chemicals and painting tools. Trusted by contractors and homeowners across India for superior quality and durable finishes.",
-  
+
+  description:
+    "Shinewalls Paints Industries manufactures premium interior & exterior paints, wall putty, waterproofing solutions, primers, construction chemicals, tile adhesives, wood coatings, industrial chemicals and painting tools. Trusted by contractors and homeowners across India for superior quality and durable finishes.",
+
   keywords: [
     "paint manufacturer India",
     "interior paint",
@@ -58,27 +60,27 @@ export const metadata = {
     "exterior waterproofing",
     "interior waterproofing",
     "textured paint",
-    "designer finishes"
+    "designer finishes",
   ],
-  
+
   authors: [{ name: "Shinewalls Paints Industries" }],
-  
+
   creator: "Shinewalls Paints Industries",
-  
+
   publisher: "Shinewalls Paints Industries",
-  
+
   formatDetection: {
     telephone: true,
     email: true,
     address: true,
   },
-  
+
   applicationName: "Shinewalls Paints",
-  
+
   referrer: "origin-when-cross-origin",
-  
+
   classification: "Business",
-  
+
   robots: {
     index: true,
     follow: true,
@@ -90,17 +92,19 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  
+
   alternates: {
     canonical: "https://www.shinewalls.com",
     languages: {
       "en-IN": "https://www.shinewalls.com",
     },
   },
-  
+
   openGraph: {
-    title: "Shinewalls Paints Industries | Premium Paint & Construction Chemicals Manufacturer",
-    description: "Leading manufacturer of premium paints, waterproofing solutions, wall putty, construction chemicals, tile adhesives, wood coatings and industrial products. Superior quality, durable finishes, trusted by professionals.",
+    title:
+      "Shinewalls Paints Industries | Premium Paint & Construction Chemicals Manufacturer",
+    description:
+      "Leading manufacturer of premium paints, waterproofing solutions, wall putty, construction chemicals, tile adhesives, wood coatings and industrial products. Superior quality, durable finishes, trusted by professionals.",
     url: "https://www.shinewalls.com",
     siteName: "Shinewalls Paints Industries",
     locale: "en_IN",
@@ -120,36 +124,27 @@ export const metadata = {
       },
     ],
   },
-  
+
   twitter: {
     card: "summary_large_image",
     title: "Shinewalls Paints Industries | Premium Paint Manufacturer",
-    description: "Manufacturer of premium paints, waterproofing solutions, wall putty, primers and construction chemicals. Superior quality for homes and commercial spaces.",
-    creator: "@shinewallspaints",
-    site: "@shinewallspaints",
+    description:
+      "Manufacturer of premium paints, waterproofing solutions, wall putty, primers and construction chemicals. Superior quality for homes and commercial spaces.",
     images: ["/og-image.jpg"],
   },
-  
+
   category: "Business",
-  
-  verification: {
-    google: "your-google-verification-code", // Add your Google Search Console verification code
-    yandex: "your-yandex-verification-code",
-    // yahoo: "your-yahoo-verification-code",
-  },
-  
+
   icons: {
     icon: [
       { url: "/favicon.ico" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png" },
-    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
     shortcut: ["/favicon.ico"],
   },
-  
+
   manifest: "/site.webmanifest",
 };
 
@@ -166,7 +161,11 @@ export default function RootLayout({ children }) {
     <html lang="en" className={poppins.variable}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="relative min-h-screen overflow-x-hidden text-slate-900 antialiased">
         {/* FIXED BACKGROUND IMAGE */}
@@ -182,9 +181,7 @@ export default function RootLayout({ children }) {
         <Navbar />
 
         {/* PAGE CONTENT */}
-        <main className="relative z-10">
-          {children}
-        </main>
+        <main className="relative z-10">{children}</main>
 
         <Footer />
       </body>

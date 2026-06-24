@@ -254,19 +254,19 @@ export const products = [
   {
     name: "Paint Brush",
     category: "Tools",
-    image: "/productimg/brush.png",
+    image: "/productimg/brush1.jpeg",
   },
   {
     name: "Paint Roller",
     category: "Tools",
-    image: "/productimg/roler.png",
+    image: "/productimg/roler1.jpeg",
   },
 
   // Solvents
   {
     name: "NC Thinner 888",
     category: "Solvents",
-    image: "/productimg/solvent.png",
+    image: "/productimg/solvent2.png",
   },
   {
     name: "NC Thinner 999",

@@ -119,9 +119,11 @@ export default function ProductsSection() {
               <div className="relative h-[280px] sm:h-[360px] md:h-[440px] lg:h-[520px] w-full bg-slate-50">
                 <Image
                   src={product.image}
-                  alt={product.name}
+                  alt={`${product.name} - Premium ${product.category} by Shinewalls Paints Industries`}
                   fill
                   className="object-contain p-4 sm:p-6"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
                 />
               </div>
 

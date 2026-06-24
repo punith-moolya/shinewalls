@@ -8,10 +8,16 @@ import TrustedCompanies from "@/sections/trusted-companies";
 import GetInTouch from "@/sections/get-in-touch";
 import SubscribeNewsletter from "@/sections/subscribe-newsletter";
 import ProductsSection from "@/sections/our-latest-products";
+import OrganizationSchema from "@/components/OrganizationSchema";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 
 export default function Page() {
   return (
     <main className="relative">
+      <OrganizationSchema/>
+      <LocalBusinessSchema/>
+
+
       <HeroSection />
       <OurLatestCreation />
       <ProductsSection/>

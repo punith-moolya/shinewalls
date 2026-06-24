@@ -28,9 +28,10 @@ export default function HeroSection() {
                     <div className="relative w-full h-[450px] sm:h-[500px] md:h-[520px] lg:h-[550px] rounded-3xl overflow-hidden shadow-2xl shadow-blue-600/20">
                         <Image
                             src="/herosection.png"
-                            alt="Hero Section Image"
+                            alt="Shinewalls Premium Paints - Interior and Exterior Paint Solutions"
                             fill
                             className="object-cover"
+                            priority
                         />
                     </div>
                 </motion.div>
@@ -46,11 +47,11 @@ export default function HeroSection() {
                         Premium Paint Manufacturing
                     </span>
 
+                    {/* SEO-OPTIMIZED H1 */}
                     <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight text-slate-900">
-                        Elevate spaces <br />
-                        with{" "}
+                        Premium Paints, Waterproofing Solutions &{" "}
                         <span className="bg-gradient-to-r from-sky-500 to-blue-700 bg-clip-text text-transparent drop-shadow">
-                            Shinewalls
+                            Construction Chemicals
                         </span>
                     </h1>
 
@@ -63,6 +64,7 @@ export default function HeroSection() {
                         <a
                             href="https://wa.me/918867238999?text=Hello%20Shinewalls,%20I%20would%20like%20to%20know%20more%20about%20your%20products."
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 px-8 py-3 text-white font-medium shadow-lg shadow-blue-600/40 transition hover:scale-[1.03] active:scale-95"
                         >
                             WhatsApp Us
@@ -70,7 +72,7 @@ export default function HeroSection() {
                         </a>
 
                         <a
-                            href="mailto:info@shinewalls.com"
+                            href="mailto:shinewallspaint@gmail.com"
                             className="inline-flex items-center gap-2 rounded-xl border border-white/60 bg-white/50 px-8 py-3 font-medium text-slate-900 backdrop-blur transition hover:bg-white/70 active:scale-95"
                         >
                             Email Contact

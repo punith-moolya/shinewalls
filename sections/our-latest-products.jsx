@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { RippleButton } from "@/components/ui/ripple-button";
 import SectionTitle from "@/components/section-title";
@@ -9,13 +9,28 @@ import { categories, products } from "@/public/products";
 export default function ProductsSection() {
   const [activeCategory, setActiveCategory] = useState("All");
 
+  // Listen for category changes from OurLatestCreation
+  useEffect(() => {
+    const handleCategoryChange = (event) => {
+      const category = event.detail;
+      if (categories.includes(category)) {
+        setActiveCategory(category);
+      }
+    };
+
+    window.addEventListener("categoryChange", handleCategoryChange);
+    return () => {
+      window.removeEventListener("categoryChange", handleCategoryChange);
+    };
+  }, []);
+
   const filteredProducts =
     activeCategory === "All"
       ? products
       : products.filter((product) => product.category === activeCategory);
 
   return (
-    <section className="w-full py-8 md:py-10 lg:py-12">
+    <section id="products" className="w-full py-8 md:py-10 lg:py-12">
       <SectionTitle
         title="Our Products"
         description="Explore our premium collection of paints,
@@ -23,7 +38,7 @@ export default function ProductsSection() {
         wood finishes, automotive coatings, and
         professional painting tools."
       />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-10">
         {/* Categories */}
         <div className="mb-8 md:mb-12">

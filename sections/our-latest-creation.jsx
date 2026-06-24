@@ -1,31 +1,79 @@
 "use client";
 
 import SectionTitle from "@/components/section-title";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { bestSellers } from "@/public/products";
+import { getProductsByCategory } from "@/public/products";
+import { ArrowRight } from "lucide-react";
+
+// 5 different categories - each card represents ONE category
+const showcaseCategories = ["Paints", "Chemicals", "Putty", "Waterproofing", "Tools"];
 
 export default function OurLatestCreation() {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [ready, setReady] = useState(false);
+  
+  // Track which product is currently shown in each card (per category)
+  const [cardProductIndex, setCardProductIndex] = useState(
+    showcaseCategories.map(() => 0)
+  );
+  
+  const intervalRef = useRef(null);
+  const productsByCategory = getProductsByCategory();
 
+  // Auto-rotate products WITHIN each card every 5 seconds
   useEffect(() => {
     if (isHovered) return;
 
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % bestSellers.length);
+    intervalRef.current = setInterval(() => {
+      setCardProductIndex((prev) => {
+        return prev.map((currentIndex, cardIndex) => {
+          const category = showcaseCategories[cardIndex];
+          const categoryProducts = productsByCategory[category] || [];
+          if (categoryProducts.length === 0) return 0;
+          return (currentIndex + 1) % categoryProducts.length;
+        });
+      });
+    }, 5000); // 5 seconds per product rotation
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isHovered, productsByCategory]);
+
+  // Auto-rotate which card is expanded (original 3.5s timing)
+  useEffect(() => {
+    if (isHovered) return;
+
+    const expandInterval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % showcaseCategories.length);
     }, 3500);
 
-    return () => clearInterval(interval);
-  }, [isHovered, bestSellers.length]);
+    return () => clearInterval(expandInterval);
+  }, [isHovered]);
+
+  const handleCheckNow = (category) => {
+    // Scroll to products section
+    const productsSection = document.getElementById("products");
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: "smooth" });
+      
+      // Dispatch custom event to change category in ProductsSection
+      setTimeout(() => {
+        window.dispatchEvent(
+          new CustomEvent("categoryChange", { detail: category })
+        );
+      }, 500); // Small delay to ensure scroll completes
+    }
+  };
 
   return (
     <section id="best-sellers" className="flex flex-col items-center mt-10">
       <SectionTitle
-        title="Best Sellers"
-        description="Our most trusted and highest-selling products preferred by homeowners, contractors, and professionals."
+        title="Our Product Range"
+        description="Explore premium products across all categories — from paints and chemicals to tools and waterproofing solutions."
       />
 
       {/* Desktop */}
@@ -38,25 +86,31 @@ export default function OurLatestCreation() {
         }}
       >
         <div className="flex gap-5 h-[430px]">
-          {bestSellers.map((product, index) => {
+          {showcaseCategories.map((category, cardIndex) => {
+            const categoryProducts = productsByCategory[category] || [];
+            const currentProductIndex = cardProductIndex[cardIndex];
+            const currentProduct = categoryProducts[currentProductIndex] || categoryProducts[0];
+            
+            if (!currentProduct) return null;
+
             const isExpanded = isHovered
-              ? hoveredIndex === index
-              : activeIndex === index;
+              ? hoveredIndex === cardIndex
+              : activeIndex === cardIndex;
 
             return (
               <motion.div
-                key={product.title}
+                key={category}
                 initial={{ y: 100, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{
-                  delay: index * 0.1,
+                  delay: cardIndex * 0.1,
                   type: "spring",
                   stiffness: 260,
                   damping: 55,
                 }}
                 onAnimationComplete={() => setReady(true)}
-                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseEnter={() => setHoveredIndex(cardIndex)}
                 className={`
                   relative overflow-hidden rounded-3xl
                   bg-white
@@ -67,22 +121,22 @@ export default function OurLatestCreation() {
                   ${isExpanded ? "flex-[3]" : "flex-[1]"}
                 `}
               >
-                {/* Product Image Area - 85% */}
+                {/* Product Image Area */}
                 <div className="h-[100%] flex items-center justify-center bg-gradient-to-br from-sky-50 via-white to-blue-50 p-6">
-                  <img
-                    src={product.image}
-                    alt={product.title}
+                  <motion.img
+                    key={`${category}-${currentProduct.name}`}
+                    src={currentProduct.image}
+                    alt={currentProduct.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
                     className="
                       max-h-full
                       max-w-full
                       object-contain
-                      transition-transform duration-500
-                      group-hover:scale-105
                     "
                   />
                 </div>
-
-                {/* Product Info Area - 15% */}
 
                 {/* Expanded Overlay */}
                 <div
@@ -95,16 +149,39 @@ export default function OurLatestCreation() {
                 >
                   <div className="absolute bottom-6 left-6 right-6 text-white">
                     <span className="inline-flex items-center gap-1 rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold text-slate-900">
-                      ⭐ BEST SELLER
+                      {category}
                     </span>
 
-                    <h3 className="mt-3 text-2xl font-bold">
-                      {product.title}
-                    </h3>
+                    <motion.h3
+                      key={`${category}-${currentProduct.name}-title`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-3 text-2xl font-bold"
+                    >
+                      {currentProduct.name}
+                    </motion.h3>
 
-                    <p className="mt-2 text-sm leading-relaxed max-w-sm">
-                      {product.description}
-                    </p>
+                    <motion.p
+                      key={`${category}-${currentProduct.name}-desc`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                      className="mt-2 text-sm leading-relaxed max-w-sm"
+                    >
+                      {currentProduct.weight
+                        ? `Premium ${category.toLowerCase()} product — Net Weight: ${currentProduct.weight}`
+                        : `Premium ${category.toLowerCase()} product with superior quality and performance.`}
+                    </motion.p>
+
+                    {/* Check Now Button */}
+                    <button
+                      onClick={() => handleCheckNow(category)}
+                      className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-sky-900 font-semibold text-sm hover:bg-sky-50 transition-all"
+                    >
+                      Check Now
+                      <ArrowRight size={16} />
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -115,23 +192,32 @@ export default function OurLatestCreation() {
 
       {/* Mobile */}
       <div className="md:hidden mt-10 w-full px-4 space-y-5">
-        {bestSellers.map((product, index) => {
-          const isOpen = activeIndex === index;
+        {showcaseCategories.map((category, cardIndex) => {
+          const categoryProducts = productsByCategory[category] || [];
+          const currentProductIndex = cardProductIndex[cardIndex];
+          const currentProduct = categoryProducts[currentProductIndex] || categoryProducts[0];
+          const isOpen = activeIndex === cardIndex;
+
+          if (!currentProduct) return null;
 
           return (
             <motion.div
-              key={product.title}
+              key={category}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              onClick={() => setActiveIndex(index)}
+              transition={{ delay: cardIndex * 0.1 }}
+              onClick={() => setActiveIndex(cardIndex)}
               className="relative overflow-hidden rounded-2xl"
             >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-full h-[240px] object-cover"
+              <motion.img
+                key={`${category}-${currentProduct.name}`}
+                src={currentProduct.image}
+                alt={currentProduct.name}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="w-full h-[240px] object-contain bg-gradient-to-br from-sky-50 via-white to-blue-50 p-4"
               />
 
               <div
@@ -142,14 +228,22 @@ export default function OurLatestCreation() {
               />
 
               <div className="absolute bottom-4 left-4 right-4">
-                <div className="rounded-2xl bg-transparent  p-4">
-                  <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                    ★★★★★
+                <div className="rounded-2xl bg-transparent p-4">
+                  <div className="flex items-center gap-2 text-yellow-500 text-sm">
+                    <span className="bg-yellow-400 text-slate-900 px-2 py-0.5 rounded text-xs font-bold">
+                      {category}
+                    </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-900 mt-2">
-                    {product.title}
-                  </h3>
+                  <motion.h3
+                    key={`${category}-${currentProduct.name}-title`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-lg font-bold text-white mt-2"
+                  >
+                    {currentProduct.name}
+                  </motion.h3>
 
                   <motion.p
                     initial={false}
@@ -157,10 +251,25 @@ export default function OurLatestCreation() {
                       height: isOpen ? "auto" : 0,
                       opacity: isOpen ? 1 : 0,
                     }}
-                    className="overflow-hidden text-sm mt-2 text-slate-600"
+                    className="overflow-hidden text-sm mt-2 text-slate-200"
                   >
-                    {product.description}
+                    {currentProduct.weight
+                      ? `Net Weight: ${currentProduct.weight}`
+                      : `Premium ${category.toLowerCase()} product.`}
                   </motion.p>
+
+                  {isOpen && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCheckNow(category);
+                      }}
+                      className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-sky-900 font-semibold text-sm"
+                    >
+                      Check Now
+                      <ArrowRight size={14} />
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -3,6 +3,7 @@
 export const categories = [
   "All",
   "Paints",
+  "Chemicals",
   "Primers",
   "Putty",
   "Waterproofing",
@@ -41,6 +42,118 @@ export const products = [
     name: "Silver Metallic",
     category: "Paints",
     image: "/productimg/paints2.png",
+  },
+
+  // Chemicals
+  {
+    name: "SW-AA261S",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem2.jpeg",
+    weight: "220.000 KG",
+  },
+  {
+    name: "SW-OPEX 92",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem3.jpeg",
+    weight: "220.000 KG",
+  },
+  {
+    name: "SW-ELASTO 50",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem4.jpeg",
+    weight: "220.000 KG",
+  },
+  {
+    name: "Titanium Dioxide R996",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem5.jpeg",
+    weight: "25 KG",
+    grade: "Rutile Grade TiO2",
+  },
+  {
+    name: "Micron Carb 2030",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem6.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "Micron Talc 2050",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem7.jpeg",
+    weight: "25 KG",
+  },
+  {
+    name: "China Clay PYJ",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem8.jpeg",
+    weight: "25 KG",
+  },
+  {
+    name: "Limestone Powder",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem9.jpeg",
+    weight: "25 KG",
+    grade: "20 Microns",
+  },
+  {
+    name: "HCU (Sanitized)",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem10.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "CDO (Sanitized)",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem11.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "HSSL-C12",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem12.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "SW-5295",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem13.jpeg",
+    weight: "220.000 KG",
+  },
+  {
+    name: "ALPHOX 200",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem14.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "SN 621 N Heur Thickener",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem15.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "Antiforming Agent Al-010",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem16.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "Diethylene Glycol",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem17.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "Pine Oil",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem18.jpeg",
+    weight: "50 KG",
+  },
+  {
+    name: "Liquid Ammonia NH3",
+    category: "Chemicals",
+    image: "/productimg/chemicals/chem19.jpeg",
+    weight: "50 KG",
   },
 
   // Primers
@@ -201,3 +314,14 @@ export const bestSellers = [
     image: "/productimg/tile.png",
   },
 ];
+
+// Get products grouped by category (excluding "All")
+export const getProductsByCategory = () => {
+  const grouped = {};
+  categories
+    .filter((cat) => cat !== "All")
+    .forEach((category) => {
+      grouped[category] = products.filter((p) => p.category === category);
+    });
+  return grouped;
+};

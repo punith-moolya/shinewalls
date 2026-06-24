@@ -35,44 +35,6 @@ export default function OrganizationSchema() {
       "https://www.facebook.com/share/p/1GzU7XdYch/",
       "https://www.instagram.com/p/DYY3Ziyxksz/?igsh=MTZienFwcmxvNXptdQ==",
     ],
-    makesOffer: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Interior & Exterior Paints",
-          description:
-            "Premium emulsion paints with superior coverage and durability",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Waterproofing Solutions",
-          description:
-            "Advanced waterproofing chemicals for roofs, walls, and basements",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Construction Chemicals",
-          description:
-            "Industrial-grade chemicals for construction and manufacturing",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Wall Putty & Primers",
-          description:
-            "High-quality wall putty and primers for perfect surface preparation",
-        },
-      },
-    ],
   };
 
   return (

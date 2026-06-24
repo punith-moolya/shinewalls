@@ -3,45 +3,13 @@
 import SectionTitle from "@/components/section-title";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { bestSellers } from "@/public/products";
 
 export default function OurLatestCreation() {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [ready, setReady] = useState(false);
-
-  const bestSellers = [
-    {
-      title: "Luxury Emulsion",
-      description:
-        "Premium interior paint delivering exceptional smoothness, rich color depth, and long-lasting elegance.",
-      image: "/productimg/paints3.png",
-    },
-    {
-      title: "Cool Proof",
-      description:
-        "Advanced waterproof and heat-reflective coating that helps keep buildings cooler and protected.",
-      image: "/productimg/waterproofing3.png",
-    },
-    {
-      title: "Platinum Emulsion",
-      description:
-        "High-performance emulsion with superior coverage, durability, and premium wall finish.",
-      image: "/productimg/paints2.png",
-    },
-    {
-      title: "PU Wood Finish",
-      description:
-        "Professional-grade wood coating that enhances natural grain while protecting surfaces.",
-      image: "/productimg/wood.png",
-    },
-    {
-      title: "Tile Adhesive",
-      description:
-        "Strong bonding adhesive for long-lasting tile installations in residential and commercial spaces.",
-      image: "/productimg/tile.png",
-    },
-  ];
 
   useEffect(() => {
     if (isHovered) return;
@@ -76,70 +44,70 @@ export default function OurLatestCreation() {
               : activeIndex === index;
 
             return (
-           <motion.div
-  key={product.title}
-  initial={{ y: 100, opacity: 0 }}
-  whileInView={{ y: 0, opacity: 1 }}
-  viewport={{ once: true }}
-  transition={{
-    delay: index * 0.1,
-    type: "spring",
-    stiffness: 260,
-    damping: 55,
-  }}
-  onAnimationComplete={() => setReady(true)}
-  onMouseEnter={() => setHoveredIndex(index)}
-  className={`
-    relative overflow-hidden rounded-3xl
-    bg-white
-    border border-slate-200
-    shadow-lg
-    transition-all duration-500 ease-in-out
-    ${ready ? "cursor-pointer" : "pointer-events-none"}
-    ${isExpanded ? "flex-[3]" : "flex-[1]"}
-  `}
->
-  {/* Product Image Area - 85% */}
-  <div className="h-[100%] flex items-center justify-center bg-gradient-to-br from-sky-50 via-white to-blue-50 p-6">
-    <img
-      src={product.image}
-      alt={product.title}
-      className="
-        max-h-full
-        max-w-full
-        object-contain
-        transition-transform duration-500
-        group-hover:scale-105
-      "
-    />
-  </div>
+              <motion.div
+                key={product.title}
+                initial={{ y: 100, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 55,
+                }}
+                onAnimationComplete={() => setReady(true)}
+                onMouseEnter={() => setHoveredIndex(index)}
+                className={`
+                  relative overflow-hidden rounded-3xl
+                  bg-white
+                  border border-slate-200
+                  shadow-lg
+                  transition-all duration-500 ease-in-out
+                  ${ready ? "cursor-pointer" : "pointer-events-none"}
+                  ${isExpanded ? "flex-[3]" : "flex-[1]"}
+                `}
+              >
+                {/* Product Image Area - 85% */}
+                <div className="h-[100%] flex items-center justify-center bg-gradient-to-br from-sky-50 via-white to-blue-50 p-6">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="
+                      max-h-full
+                      max-w-full
+                      object-contain
+                      transition-transform duration-500
+                      group-hover:scale-105
+                    "
+                  />
+                </div>
 
-  {/* Product Info Area - 15% */}
+                {/* Product Info Area - 15% */}
 
-  {/* Expanded Overlay */}
-  <div
-    className={`
-      absolute inset-0 bg-gradient-to-t
-      from-sky-900/80 via-sky-900/20 to-transparent
-      transition-all duration-300
-      ${isExpanded ? "opacity-100" : "opacity-0"}
-    `}
-  >
-    <div className="absolute bottom-6 left-6 right-6 text-white">
-      <span className="inline-flex items-center gap-1 rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold text-slate-900">
-        ⭐ BEST SELLER
-      </span>
+                {/* Expanded Overlay */}
+                <div
+                  className={`
+                    absolute inset-0 bg-gradient-to-t
+                    from-sky-900/80 via-sky-900/20 to-transparent
+                    transition-all duration-300
+                    ${isExpanded ? "opacity-100" : "opacity-0"}
+                  `}
+                >
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold text-slate-900">
+                      ⭐ BEST SELLER
+                    </span>
 
-      <h3 className="mt-3 text-2xl font-bold">
-        {product.title}
-      </h3>
+                    <h3 className="mt-3 text-2xl font-bold">
+                      {product.title}
+                    </h3>
 
-      <p className="mt-2 text-sm leading-relaxed max-w-sm">
-        {product.description}
-      </p>
-    </div>
-  </div>
-</motion.div>
+                    <p className="mt-2 text-sm leading-relaxed max-w-sm">
+                      {product.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             );
           })}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import SectionTitle from "@/components/section-title";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Phone, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
@@ -50,6 +50,59 @@ export default function GetInTouch() {
         viewport={{ once: true }}
         className="w-full max-w-4xl mt-12 md:mt-16 bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl rounded-3xl p-6 md:p-10"
       >
+        {/* Quick Contact Buttons — BIG & PROMINENT */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {/* Call Now Button */}
+          <a
+            href="tel:+918867238999"
+            className="
+              flex items-center justify-center gap-3
+              rounded-2xl
+              bg-slate-900
+              px-6 py-5
+              text-white text-base font-semibold
+              shadow-xl shadow-slate-900/20
+              hover:bg-slate-800 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300
+              no-underline
+            "
+          >
+            <Phone size={22} strokeWidth={2} />
+            <span>Call Now</span>
+          </a>
+
+          {/* WhatsApp Button */}
+          <a
+            href="https://wa.me/918867238999?text=Hello%20Shinewalls,%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              flex items-center justify-center gap-3
+              rounded-2xl
+              bg-gradient-to-r from-sky-600 to-blue-700
+              px-6 py-5
+              text-white text-base font-semibold
+              shadow-xl shadow-blue-600/20
+              hover:brightness-110 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300
+              no-underline
+            "
+          >
+            <MessageCircle size={22} strokeWidth={2} />
+            <span>WhatsApp</span>
+          </a>
+        </div>
+
+        {/* Divider */}
+        <div className="relative mb-8">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-slate-200"></div>
+          </div>
+          <div className="relative flex justify-center">
+            <span className="px-4 bg-white/70 text-sm text-slate-500 font-medium">
+              Or send us a message
+            </span>
+          </div>
+        </div>
+
         <form
           ref={formRef}
           onSubmit={sendEmail}
@@ -79,7 +132,7 @@ export default function GetInTouch() {
               name="user_email"
               required
               placeholder="Enter your email"
-              className="mt-2 px-4 py-3 rounded-xl border border-slate-300 bg-white/80"
+              className="mt-4 py-3 rounded-xl border border-slate-300 bg-white/80"
             />
           </div>
 
